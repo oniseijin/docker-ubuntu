@@ -1,0 +1,32 @@
+version: "3.0"
+services: 
+  kubectl:
+    build: 
+      context: kubectl 
+    image: oniseijin/kubectl-ubuntu
+    command: tail -F anything
+    environment: 
+      - KUBECONFIG=/.kube/config:/.kube/eks-sandbox:/.kube/config-gce
+      - HOST_HOME="${HOME}"
+    volumes: 
+      - ${HOME}/.kube:/.kube
+      - ${HOME}/devel/kube:/code
+  vim:
+    build: 
+      context: vim
+    image: oniseijin/vim-ubuntu
+    command: tail -F anything
+    volumes: 
+      - ${HOME}/devel/kube:/code
+  kubectl-max:
+    build: 
+      context: kubectl-max 
+    image: oniseijin/kubectl-max-ubuntu
+    command: tail -F anything
+    environment: 
+      - KUBECONFIG=/.kube/config:/.kube/eks-sandbox:/.kube/config-gce
+      - HOST_HOME="${HOME}"
+    volumes: 
+      - ${HOME}/.kube:/.kube
+      - ${HOME}/devel/kube:/code
+

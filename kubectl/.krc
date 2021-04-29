@@ -1,0 +1,22 @@
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+alias kn="kubectl config set-context --current --namespace "
+alias ku="kubectl config use-context "
+alias kw="watch -n 0.5 'kubectl config current-context; kubectl config view | grep namespace | uniq; kubectl get no,ns,po,rs,deploy,job,cronjob,cm,sa,secrets,pv,pvc,svc,ep,ingress -o wide --show-labels;'"
+alias kc="kubectl create -f"
+alias kr="kubectl run"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias ke="kubectl explain"
+alias ka="kubectl apply -f"
+export KUBE_EDITOR=vim
+alias kl="source <(kubectl completion bash)"
+source <(kubectl completion bash)
+alias k="kubectl"
+complete -F __start_kubectl k
+export do="--dry-run=client -o yaml"
+export fo="--force --grace-period=0"
